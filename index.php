@@ -5,15 +5,9 @@ include_once  'Huffman.inc';
 
 define('FILE_PATH', 'texto.txt');
 
-$values = array(
-  'a' => 5,
-  'b' => 9,
-  'c' => 12,
-  'd' => 13,
-  'e' => 16,
-  'f' => 45,
-);
 
+
+$values = getDicionary(FILE_PATH);
 $huffman = new Huffman($values);
 $huffman->buildTree();
 

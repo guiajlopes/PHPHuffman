@@ -5,6 +5,7 @@ class Huffman {
   private $stack;
   private $root;
   private $roots;
+  private $right_element;
 
   /**
    * Construtor de classe
@@ -14,6 +15,9 @@ class Huffman {
    */
   function __construct($dicionary) {
     $this->dicionary = $dicionary;
+
+    $keys = array_keys($dicionary);
+    $this->right_element[$keys[0]] = array_shift($dicionary);
     $this->stack = $dicionary;
   }
 
@@ -38,16 +42,18 @@ class Huffman {
   }
 
   /**
-   * Monta a árvore.
+   * Monta a árvore de huffman.
    */
   public function buildTree() {
     while (!empty($this->stack)) {
+      // Remove os dois ultimos elementos (menores) da pilha.
       $first_element = $this->removeFromStack();
       $second_element = $this->removeFromStack();
 
       $root_data = $first_element->data . $second_element->data;
       $root_frequencia = $first_element->frequencia + $second_element->frequencia;
       $root_element = new HuffmanNode($root_data, $root_frequencia);
+      // Verifica qual a maior frequencia.
       if ($first_element->frequencia >= $second_element->frequencia) {
         $root_element->left = $first_element;
         $root_element->right = $second_element;
@@ -57,15 +63,28 @@ class Huffman {
         $root_element->left = $second_element;
       }
 
-
+      // Verifica se a pilha está vazia.
       if (!empty($this->stack)) {
+        // Adiciona na pilha.
         $this->stack[$root_element->data] = $root_element->frequencia;
+        // Adiciona no array de raizes.
         $this->roots[$root_element->data] =  $root_element;
       }
       else {
         $this->root = $root_element;
       }
     }
+
+    foreach ($this->right_element as $data => $frequencia) {
+      $right_element = new HuffmanNode($data, $frequencia);
+      $root_element = new HuffmanNode($this->root->data . $right_element->data, $this->root->frequencia + $right_element->frequencia);
+
+      $root_element->left = $this->root;
+      $root_element->right = $right_element;
+      $this->root = $root_element;
+    }
+    // $right_element = new HuffmanNode()
+    // $root_element = new HuffmanNode()
   }
 
   /**
