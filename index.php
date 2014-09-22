@@ -3,17 +3,50 @@
 include_once 'HuffmanNode.inc';
 include_once  'Huffman.inc';
 
+// Seta as constantes.
 define('FILE_PATH', 'texto.txt');
-
-
 
 $values = getDicionary(FILE_PATH);
 $huffman = new Huffman($values);
 $huffman->buildTree();
+$huffman->codify($huffman->getRoot());
 
-echo '<pre>';
-print_r($huffman->getRoot());
-echo '</pre>';
+
+$codify_array = $huffman->getCodify();
+
+echo codifyFile(FILE_PATH, $codify_array, $values);
+
+
+/**
+ * Codifica string para transferencia.
+ *
+ * @param string $file_path
+ *  Path do arquivo que deve ser codificado.
+ * @param array $codify_array
+ *  Array com as codificações.
+ * @param array $dicionary
+ *  Array com o dicionario das palavras lidas no arquivo.
+ *
+ * @return string
+ *  Retorna uma String contendo o dicionario serializado mais o arquivo codificado.
+ *
+ * @see SplFileObject Class
+ */
+function codifyFile($file_path, $codify_array, $dicionary) {
+  $codifed = serialize($dicionary);
+  // Faz a leitura do arquivo.
+  $file = new SplFileObject($file_path);
+  // Percorre linhas a linha do arquivo.
+  while (!$file->eof()) {
+    $line = $file->fgetss();
+    // Percorre letra a letra da linha.
+    for ($i = 0; $i < strlen($line); $i++) {
+      // $escreve = fwrite($fp, $codify_array[$line[$i]]);
+      $codifed .= $codify_array[$line[$i]];
+    }
+  }
+  return $codifed;
+}
 
 /**
  * Realiza a leitura de um arquivo e transfere para um array de char.

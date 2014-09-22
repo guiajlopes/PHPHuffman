@@ -6,6 +6,7 @@ class Huffman {
   private $root;
   private $roots;
   private $right_element;
+  private $codify_array;
 
   /**
    * Construtor de classe
@@ -19,6 +20,10 @@ class Huffman {
     $keys = array_keys($dicionary);
     $this->right_element[$keys[0]] = array_shift($dicionary);
     $this->stack = $dicionary;
+  }
+
+  function getCodify() {
+    return $this->codify_array;
   }
 
   /**
@@ -68,7 +73,7 @@ class Huffman {
         // Adiciona na pilha.
         $this->stack[$root_element->data] = $root_element->frequencia;
         // Adiciona no array de raizes.
-        $this->roots[$root_element->data] =  $root_element;
+        $this->roots[$root_element->data] = $root_element;
       }
       else {
         $this->root = $root_element;
@@ -83,8 +88,30 @@ class Huffman {
       $root_element->right = $right_element;
       $this->root = $root_element;
     }
-    // $right_element = new HuffmanNode()
-    // $root_element = new HuffmanNode()
+  }
+
+  /**
+   * Codifica para binário.
+   *
+   * @param object $root
+   *   Root da árvore.
+   *
+   * @param string $binary
+   *   Codificação binária.
+   */
+  public function codify($root, $binary = NULL) {
+    if (!empty($root->left)) {
+      $this->codify($root->left, $binary . '1');
+    }
+    if (!empty($root->right)) {
+      $this->codify($root->right, $binary . '0');
+    }
+    if (empty($root->right) && empty($root->left)) {
+      // $obj = new stdClass;
+      // $obj->data = $root;
+      // $obj->binary = $binary;
+      $this->codify_array[$root->data] = $binary;
+    }
   }
 
   /**
