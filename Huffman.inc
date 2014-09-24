@@ -22,9 +22,16 @@ class Huffman {
     $this->stack = $dicionary;
   }
 
+  /**
+   * Retorna o parametro com o array codificado
+   *
+   * @return array
+   *   Array contendo codificação binária para as strings.
+   */
   function getCodify() {
     return $this->codify_array;
   }
+
 
   /**
    * Verifica se está vazio.
@@ -107,11 +114,45 @@ class Huffman {
       $this->codify($root->right, $binary . '0');
     }
     if (empty($root->right) && empty($root->left)) {
-      // $obj = new stdClass;
-      // $obj->data = $root;
-      // $obj->binary = $binary;
       $this->codify_array[$root->data] = $binary;
     }
+  }
+
+  /**
+   * Decodify binary.
+   *
+   * @param string $binary
+   *   Binário correspondente a posição na árvore.
+   *
+   * @return String
+   *   String total do decode.
+   */
+  public function decodeBinary(&$binary, $string = NULL) {
+    $root = $this->root;
+
+    if (empty($binary)) {
+      return nl2br($string);
+    }
+
+
+    if ($root->is_folha()) {
+      $position = array_shift($binary);
+    }
+    else {
+      while (!$root->is_folha()) {
+        $position = array_shift($binary);
+        if ($position == 1) {
+          $root = $root->left;
+        }
+        else {
+          $root = $root->right;
+        }
+      }
+    }
+
+    $string .= $root->data;
+
+    return $this->decodeBinary($binary, $string);
   }
 
   /**

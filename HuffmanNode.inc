@@ -15,4 +15,8 @@ class HuffmanNode {
     $this->right = NULL;
     $this->frequencia = $frequencia;
   }
+
+  function is_folha() {
+    return is_null($this->left) && is_null($this->right);
+  }
 }

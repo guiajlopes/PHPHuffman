@@ -7,15 +7,82 @@ include_once  'Huffman.inc';
 define('FILE_PATH', 'texto.txt');
 
 $values = getDicionary(FILE_PATH);
+print_r($values);
 $huffman = new Huffman($values);
 $huffman->buildTree();
 $huffman->codify($huffman->getRoot());
 
 
+$root = $huffman->getRoot();
+// print_r($root);
+// echo '<pre>';
+
+// echo '</pre>';
+
 $codify_array = $huffman->getCodify();
+$codifyFile = codifyFile(FILE_PATH, $codify_array, $values);
 
-echo codifyFile(FILE_PATH, $codify_array, $values);
+echo '<h1> Arquivo codificado </h1>';
+echo '<div>';
+echo $codifyFile;
+echo '</div>';
+echo '<h1> Arquivo decodificado </h1>';
+echo '<div>';
+echo decodeFile($codifyFile);
+echo '</div>';
 
+
+
+/**
+ * Function para decodificar arquivo.
+ *
+ * @param string $codifyFile.
+ *  Arquivo codificado.
+ *
+ * @return string
+ *  String decodificada.
+ */
+function decodeFile($codifyFile) {
+  // Pega o Dicionario
+  $file = explode('}' ,$codifyFile);
+  $dicionary = $file[0] . '}';
+  $dicionary = unserialize($dicionary);
+
+  // Cria arvore a partir do dicionario.
+  $huffman = new Huffman($dicionary);
+  // Da um build na árvore
+  $huffman->buildTree();
+
+  // Pega a string do arquivo.
+  $arquivo = $file[1];
+
+  // echo $arquivo;
+
+  return $huffman->decodeBinary(str_split($arquivo));
+
+  // return $decodeFileTree;
+}
+
+function decodeFileTree($arquivo, $root, $huffman_root, $posicao, $string = NULL) {
+  if ($posicao >= strlen($arquivo)) {
+    return $string;
+  }
+  else {
+    if ($root->is_folha()) {
+      $string .= $root->data;
+      decodeFileTree($arquivo, $huffman_root, $huffman_root, $posicao + 1, $string);
+    }
+    else {
+      $valor_linha = $arquivo[$posicao];
+      if ($valor_linha == 1) {
+        decodeFileTree($arquivo, $root->left, $huffman_root, $posicao + 1, $string);
+      }
+      else {
+        decodeFileTree($arquivo, $root->right, $huffman_root, $posicao + 1, $string);
+      }
+    }
+  }
+}
 
 /**
  * Codifica string para transferencia.
