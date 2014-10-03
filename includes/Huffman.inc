@@ -19,7 +19,7 @@ class Huffman {
     $this->dicionary = $dicionary;
 
     $keys = array_keys($dicionary);
-    $this->right_element[$keys[0]] = array_shift($dicionary);
+    // $this->right_element[$keys[0]] = array_shift($dicionary);
     $this->stack = $dicionary;
   }
 
@@ -88,14 +88,14 @@ class Huffman {
       }
     }
 
-    foreach ($this->right_element as $data => $frequencia) {
-      $right_element = new HuffmanNode($data, $frequencia);
-      $root_element = new HuffmanNode($this->root->data . $right_element->data, $this->root->frequencia + $right_element->frequencia);
+    // foreach ($this->right_element as $data => $frequencia) {
+    //   $right_element = new HuffmanNode($data, $frequencia);
+    //   $root_element = new HuffmanNode($this->root->data . $right_element->data, $this->root->frequencia + $right_element->frequencia);
 
-      $root_element->left = $this->root;
-      $root_element->right = $right_element;
-      $this->root = $root_element;
-    }
+    //   $root_element->left = $this->root;
+    //   $root_element->right = $right_element;
+    //   $this->root = $root_element;
+    // }
   }
 
   /**
