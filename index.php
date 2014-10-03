@@ -37,7 +37,10 @@ $app->get('/decode', function() use ($app, $twig) {
     $codifyString .= $line;
   }
 
-  echo $twig->render('decode.html', array('body' => ClasseAuxiliar::decodeFile($codifyString)));
+  $classe_auxiliar = new ClasseAuxiliar(FILE_PATH);
+  $decodeFile = $classe_auxiliar->decodeFile($codifyString);
+
+  echo $twig->render('decode.html', array('body' => $decodeFile, 'razao' => $classe_auxiliar->getRazao()));
 });
 
 /**

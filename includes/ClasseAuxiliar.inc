@@ -4,9 +4,12 @@ use SplFileObject;
 
 class ClasseAuxiliar {
   private $file_path;
+  private $razao_decode;
 
-  function __construct($file_path) {
-    $this->file_path = $file_path;
+  function __construct($file_path = NULL) {
+    if (!is_null($file_path)) {
+      $this->file_path = $file_path;
+    }
   }
 
   /**
@@ -103,6 +106,7 @@ class ClasseAuxiliar {
     // Pega o Dicionario
     $file = explode('}' ,$codifyFile);
     $dicionary = $file[0] . '}';
+    $this->razao_decode = strlen($dicionary);
     $dicionary = unserialize($dicionary);
 
     // Cria arvore a partir do dicionario.
@@ -112,7 +116,14 @@ class ClasseAuxiliar {
 
     // Pega a string do arquivo.
     $arquivo = $file[1];
+    $this->razao_decode += (strlen($arquivo) / 8);
+    $this->razao_decode = number_format($this->razao_decode / filesize($this->file_path), 2);
 
     return $huffman->decodeBinary(str_split($arquivo));
   }
+
+  function getRazao() {
+    return $this->razao_decode;
+  }
+
 }
