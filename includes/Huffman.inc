@@ -1,4 +1,5 @@
 <?php
+namespace TrabalhoGA\Includes;
 
 class Huffman {
   private $dicionary;

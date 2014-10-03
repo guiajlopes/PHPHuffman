@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% block head %}
+            <title>{% block title %}{% endblock %} - Trabalho GA</title>
+        {% endblock %}
+        <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+        <link href="css/main.css" rel="stylesheet">
+    </head>
+    <body>
+      <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+          <div class="container">
+            <ul class="nav navbar-nav">
+              <li>
+                <a href="index.php">Home</a>
+              </li>
+              <li>
+                <a href="encode">Codificar</a>
+              </li>
+              <li>
+                <a href="decode">Decodificar</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      <section class="container theme-showcase">
+        <div id="content">{% block content %}{% endblock %}</div>
+      </section>
+      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+      <script src="bower_components/jquery/dist/jquery.min.js"></script>
+      <!-- Include all compiled plugins (below), or include individual files as needed -->
+      <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    </body>
+</html>

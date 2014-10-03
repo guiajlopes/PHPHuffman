@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}
+  Codificador
+{% endblock %}
+{% block content %}
+  <div class="page-header">
+      <h1 class="title"> Arquivo Codificado </h1>
+  </div>
+  <div class="content">
+    {{ arquivo }}
+  </div>
+  <div class="jumbotron tamanho-content">
+    <p> Tamanho médio : </p>
+    <h1>
+    {{ tamanho }}
+    </h1>
+  </div>
+{% endblock %}

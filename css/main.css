@@ -1,0 +1,11 @@
+/*section {
+  width: 1214px;
+  margin: 0 auto;
+}*/
+.content {
+  overflow: scroll;
+}
+
+.tamanho-content {
+  margin-top: 20px;
+}

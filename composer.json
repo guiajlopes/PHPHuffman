@@ -1,0 +1,14 @@
+{
+    "name": "root/trabalho_ga",
+    "description": "Trabalho implementando codigo de Huffman",
+    "authors": [
+        {
+            "name": "guilherme lopes",
+            "email": "guiajlopes@gmail.com"
+        }
+    ],
+    "require": {
+        "twig/twig": "1.*",
+         "slim/slim": "2.*"
+    }
+}
