@@ -9,3 +9,22 @@
 .tamanho-content {
   margin-top: 20px;
 }
+
+h1.inline {
+  display: table-cell;
+  padding: 0;
+  vertical-align: middle;
+  width: 200px;
+  text-align: right;
+}
+
+p.inline {
+  display: table-cell;
+  padding: 0;
+  vertical-align: middle;
+  padding-left: 10px;
+}
+
+.table {
+  display: table;
+}

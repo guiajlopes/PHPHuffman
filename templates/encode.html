@@ -9,10 +9,13 @@
   <div class="content">
     {{ arquivo }}
   </div>
-  <div class="jumbotron tamanho-content">
+  <div class="jumbotron tamanho-content clearfix">
     <p> Tamanho médio : </p>
-    <h1>
-    {{ tamanho }}
-    </h1>
+    <div class="table">
+      <h1 class="inline">
+      {{ tamanho }}
+      </h1>
+      <p class="inline"> bits/símbolo </p>
+    <div>
   </div>
 {% endblock %}

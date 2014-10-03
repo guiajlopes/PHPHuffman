@@ -9,16 +9,25 @@ use TrabalhoGA\Includes\Huffman;
 
 \Slim\Slim::registerAutoloader();
 
+// Definindo Twig.
 $loader = new Twig_loader_Filesystem('templates');
 $twig = new Twig_Environment($loader);
+
+// Iniciando APP com Slim.
 $app = new \Slim\Slim();
 
 define('FILE_PATH', 'texto.txt');
 
+/**
+ * Front Page
+ */
 $app->get('/', function() use ($app, $twig){
   echo $twig->render('index.html');
 });
 
+/**
+ * Página de decodificação.
+ */
 $app->get('/decode', function() use ($app, $twig) {
   $codifyString = '';
 
@@ -31,6 +40,9 @@ $app->get('/decode', function() use ($app, $twig) {
   echo $twig->render('decode.html', array('body' => ClasseAuxiliar::decodeFile($codifyString)));
 });
 
+/**
+ * Página de codificação.
+ */
 $app->get('/encode', function () use ($app, $twig) {
   $classe_auxiliar = new ClasseAuxiliar(FILE_PATH);
   $dicionary = $classe_auxiliar->getDicionary();
@@ -55,5 +67,6 @@ $app->get('/encode', function () use ($app, $twig) {
   ));
 });
 
+// Rodando o aplicativo slim.
 $app->run();
 
