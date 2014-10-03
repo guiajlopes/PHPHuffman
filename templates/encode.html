@@ -4,6 +4,29 @@
 {% endblock %}
 {% block content %}
   <div class="page-header">
+    <h1> Codificação </h1>
+  </div>
+  <div class="listagem">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th> Char </th>
+          <th> Binário </th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for key,item in dicionary %}
+        <tr>
+          <td> {{ key }} </td>
+          <td> {{ item }} </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    </ul>
+  </div>
+  <div class="page-header">
       <h1 class="title"> Arquivo Codificado </h1>
   </div>
   <div class="content">

@@ -28,3 +28,7 @@ p.inline {
 .table {
   display: table;
 }
+
+#content {
+  margin-bottom: 40px;
+}

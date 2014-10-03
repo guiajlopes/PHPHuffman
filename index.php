@@ -67,6 +67,7 @@ $app->get('/encode', function () use ($app, $twig) {
   echo $twig->render('encode.html', array(
     'arquivo' => $codifyFile,
     'tamanho' => $classe_auxiliar->getValorMedio($codify_array),
+    'dicionary' => $codify_array,
   ));
 });
 
