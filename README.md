@@ -8,3 +8,4 @@ Install
 
 * composer install
 * bower install
+* Dar permissão de leitura para o usuário do apache no arquivo codify.txt
